@@ -1,0 +1,27 @@
+[tools]
+"github:WGUNDERWOOD/tex-fmt" = "latest"
+tinytex = "latest"
+
+[tasks.save-tex-packages]
+description = "Save installed TeX packages"
+run = '''
+  tlmgr list --only-installed --data name > tex-packages.txt || true
+'''
+
+[tasks.install-tex-packages]
+description = "Install required TeX packages"
+run = '''
+  grep -vE '^\s*#' tex-packages.txt | xargs tlmgr install
+'''
+
+[tasks.build]
+description = "Build the PDF using latexmk"
+run = "latexmk -interaction=nonstopmode -file-line-error -pdf -outdir=build main.tex"
+
+[tasks.format]
+description = "Format LaTeX source files"
+run = "tex-fmt --no-wrap '**/*.tex'"
+
+[tasks.clean]
+description = "Clean auxiliary files"
+run = "latexmk -C -outdir=build"
