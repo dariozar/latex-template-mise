@@ -1,5 +1,6 @@
 [tools]
 "github:WGUNDERWOOD/tex-fmt" = "latest"
+"pipx:bib_cleaner" = "latest"
 tinytex = "latest"
 
 [tasks.save-tex-packages]
@@ -21,6 +22,13 @@ run = "latexmk -interaction=nonstopmode -file-line-error -pdf -outdir=build main
 [tasks.format]
 description = "Format LaTeX source files"
 run = "tex-fmt --no-wrap '**/*.tex'"
+
+[tasks.clean-bib]
+description = "Clean bibliography files"
+run = """
+newbibfile="$(basename {{arg(name='bibfile')}} .bib)_clean.bib"
+bib_cleaner -t **/*.tex -o $newbibfile {{arg(name='bibfile')}}
+"""
 
 [tasks.clean]
 description = "Clean auxiliary files"
