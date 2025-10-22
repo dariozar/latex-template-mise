@@ -1,7 +1,20 @@
+# Mise configuration file for LaTeX project
+
+# Tools: formatters, bibliography cleaners, tinytex
 [tools]
 "github:WGUNDERWOOD/tex-fmt" = "latest"
 "pipx:bib_cleaner" = "latest"
 tinytex = "latest"
+
+# By default the project root is the current working directory
+# It can be overridden by setting the `project_root` variable
+#   in the [vars] section of a mise.toml file 
+[vars]
+project_root = "{{ cwd }}"
+
+# Task configurations
+[task_config]
+dir = "{{ vars.project_root }}"
 
 [tasks.save-tex-packages]
 description = "Save installed TeX packages"
