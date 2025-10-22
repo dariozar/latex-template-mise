@@ -17,19 +17,21 @@ run = '''
 
 [tasks.build]
 description = "Build the PDF using latexmk"
-run = "latexmk -interaction=nonstopmode -file-line-error -pdf -outdir=build main.tex"
+run = '''
+latexmk -interaction=nonstopmode -file-line-error -pdf -outdir=build main.tex
+'''
 
 [tasks.format]
 description = "Format LaTeX source files"
-run = "tex-fmt --no-wrap '**/*.tex'"
+run = "tex-fmt --nowrap --recursive"
 
 [tasks.clean-bib]
 description = "Clean bibliography files"
-run = """
+run = '''
 newbibfile="$(basename {{arg(name='bibfile')}} .bib)_clean.bib"
-bib_cleaner -t **/*.tex -o $newbibfile {{arg(name='bibfile')}}
-"""
+bib_cleaner -t **/*.tex -o '$newbibfile' '{{arg(name='bibfile')}}'
+'''
 
 [tasks.clean]
 description = "Clean auxiliary files"
-run = "latexmk -C -outdir=build"
+run = "latexmk -C -outdir=build main.tex"
