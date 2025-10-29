@@ -42,7 +42,7 @@ run = "tex-fmt --nowrap --recursive"
 description = "Clean bibliography files"
 run = '''
 newbibfile="$(basename {{arg(name='bibfile')}} .bib)_clean.bib"
-bib_cleaner -t **/*.tex -o '$newbibfile' '{{arg(name='bibfile')}}'
+bib_cleaner -t **/*.tex -o "$newbibfile" '{{arg(name='bibfile')}}'
 '''
 
 [tasks.clean]

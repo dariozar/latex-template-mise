@@ -11,3 +11,15 @@
 **.synctex.gz
 **.dvi
 **.bbl
+**.toc
+**-SAVE-ERROR
+
+**/*.4ct
+**/*.4tc
+**/*.idv
+**/*.lg
+**/*.lof
+**/*.tmp
+**/*.xref
+**/*.soc
+**/*.snm
