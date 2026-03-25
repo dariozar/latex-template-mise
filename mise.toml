@@ -25,13 +25,14 @@ run = '''
 [tasks.install-tex-packages]
 description = "Install required TeX packages"
 run = '''
+  tlmgr update --self
   grep -vE '^\s*#' tex-packages.txt | xargs tlmgr install
 '''
 
 [tasks.build]
 description = "Build the PDF using latexmk"
 run = '''
-latexmk -interaction=nonstopmode -file-line-error -pdf -outdir=build main.tex
+  latexmk -interaction=nonstopmode -file-line-error -pdf -outdir=build main.tex
 '''
 
 [tasks.format]
@@ -41,8 +42,8 @@ run = "tex-fmt --nowrap --recursive"
 [tasks.clean-bib]
 description = "Clean bibliography files"
 run = '''
-newbibfile="$(basename {{arg(name='bibfile')}} .bib)_clean.bib"
-bib_cleaner -t **/*.tex -o "$newbibfile" '{{arg(name='bibfile')}}'
+  newbibfile="$(basename {{arg(name='bibfile')}} .bib)_clean.bib"
+  bib_cleaner -t **/*.tex -o "$newbibfile" '{{arg(name='bibfile')}}'
 '''
 
 [tasks.clean]
